@@ -31,7 +31,6 @@
 
 <script>
 import marked from 'marked'
-import { mapActions } from 'vuex'
 import _ from 'lodash'
 
 export default {
@@ -55,7 +54,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setNote']),
     deleteNote: function () {
       if (window.confirm('Are you sure you want to delete this note?')) {
         this.$emit('delete-note')
