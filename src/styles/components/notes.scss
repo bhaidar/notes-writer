@@ -1,0 +1,15 @@
+.notes-container {
+  display: flex;
+  justify-content: space-between;
+
+    &__list {
+        width: 250px;
+        background: $color-bg;
+        flex-shrink: 0;
+    }
+
+    &__create {
+        flex-grow: 1;
+        display: flex;
+    }
+}

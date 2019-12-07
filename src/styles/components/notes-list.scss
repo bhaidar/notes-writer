@@ -1,0 +1,23 @@
+.notes {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &__items {
+        color: white;
+        margin: 16px;
+        overflow: auto;
+        height: 100%;
+
+        &__item {
+            cursor: pointer;
+
+            &:hover {
+                transition: background 0.3s ease;
+                background: #6e7491;
+            }
+        }
+    }
+}
