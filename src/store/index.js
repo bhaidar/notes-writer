@@ -21,18 +21,22 @@ fb.notesCollection.orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
 export const store = new Vuex.Store({
   state: {
     notesList: [],
-    note: {}
+    note: {},
+    performingDelete: false
   },
   actions: {
     async deleteNote ({ commit, state }) {
       let id = (state.note && state.note.id)
 
       if (id) {
-        let url = `/api/notes/${state.note.id}`
-        await axios.delete(url)
+        try {
+          commit('setPerformingDelete', true)
+          await fb.notesCollection.doc(id).delete()
+          commit('setPerformingDelete', !state.performingDelete)
+        } catch (error) {
+          console.error(error)
+        }
       }
-
-      commit('deleteNote', { id })
     },
     setNote ({ commit }, { id = '', body = '' } = {}) {
       commit('setNote', { id, body })
@@ -55,13 +59,6 @@ export const store = new Vuex.Store({
     }
   },
   mutations: {
-    deleteNote (state, { id }) {
-      if (id) {
-        state.notesList = state.notesList.filter(n => n.id !== id)
-      }
-
-      state.note = null
-    },
     setNotes (state, notes) {
       state.notesList = notes
     },
@@ -88,6 +85,9 @@ export const store = new Vuex.Store({
       }
 
       state.note = null
+    },
+    setPerformingDelete (state, flag) {
+      state.performingDelete = flag
     }
   }
 })

@@ -28,9 +28,6 @@ export default {
   computed: {
     ...mapState(['notesList', 'note'])
   },
-  mounted () {
-    // this.getNotesList()
-  },
   methods: {
     ...mapActions(['saveNote', 'setNote', 'deleteNote'])
   }
