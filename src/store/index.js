@@ -1,65 +1,29 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+const fb = require('./../firebaseConfig.js')
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+// realtime updates from our notes collection
+fb.notesCollection.orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
+  let notesArray = []
+
+  querySnapshot.forEach(doc => {
+    let note = doc.data()
+    note.id = doc.id
+    notesArray.push(note)
+  })
+
+  store.commit('setNotes', notesArray)
+})
+
+export const store = new Vuex.Store({
   state: {
     notesList: [],
     note: {}
   },
-  getters: {
-    notes: state => state.notesList,
-    currentNote: state => state.note
-  },
-  mutations: {
-    deleteNote (state, { id }) {
-      if (id) {
-        state.notesList = state.notesList.filter(n => n.id !== id)
-      }
-
-      state.note = null
-    },
-    setNotesList (state, notes) {
-      state.notesList = notes
-    },
-    setNote (state, { id, body }) {
-      let note = {}
-
-      if (id) {
-        note = state.notesList.find(note => note.id === id)
-        const newNoteBody = body || note.body
-
-        note = { ...note, body: newNoteBody, title: newNoteBody.substring(0, 20) }
-      } else if (body) {
-        note = { body, title: body.substring(0, 20) }
-      }
-
-      state.note = note
-    },
-    saveNote (state, note) {
-      const notePosition = state.notesList.findIndex(n => n.id === note.id)
-      if (notePosition < 0) {
-        state.notesList.push(note)
-      } else {
-        state.notesList.splice(notePosition, 1, note)
-      }
-
-      state.note = null
-    }
-  },
   actions: {
-    async getNotesList ({ commit }) {
-      let notes = []
-
-      await axios.get('/api/notes')
-        .then(response => {
-          notes = response.data.notes
-        })
-
-      commit('setNotesList', notes)
-    },
     async deleteNote ({ commit, state }) {
       let id = (state.note && state.note.id)
 
@@ -88,6 +52,42 @@ export default new Vuex.Store({
       })
 
       commit('saveNote', note)
+    }
+  },
+  mutations: {
+    deleteNote (state, { id }) {
+      if (id) {
+        state.notesList = state.notesList.filter(n => n.id !== id)
+      }
+
+      state.note = null
+    },
+    setNotes (state, notes) {
+      state.notesList = notes
+    },
+    setNote (state, { id, body }) {
+      let note = {}
+
+      if (id) {
+        note = state.notesList.find(note => note.id === id)
+        const newNoteBody = body || note.body
+
+        note = { ...note, body: newNoteBody, title: newNoteBody.substring(0, 20) }
+      } else if (body) {
+        note = { body, title: body.substring(0, 20) }
+      }
+
+      state.note = note
+    },
+    saveNote (state, note) {
+      const notePosition = state.notesList.findIndex(n => n.id === note.id)
+      if (notePosition < 0) {
+        state.notesList.push(note)
+      } else {
+        state.notesList.splice(notePosition, 1, note)
+      }
+
+      state.note = null
     }
   }
 })

@@ -1,12 +1,12 @@
 <template>
   <div class="notes-container">
     <NotesList
-      :notes="notes"
+      :notes="notesList"
       @set-note="setNote"
       class="notes-container__list"
     ></NotesList>
     <NotesCreate
-      :note="currentNote"
+      :note="note"
       @save-note="saveNote"
       @set-note="setNote"
       @delete-note="deleteNote"
@@ -18,7 +18,7 @@
 <script>
 import NotesCreate from './NotesCreate'
 import NotesList from './NotesList'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   components: {
@@ -26,13 +26,13 @@ export default {
     NotesList
   },
   computed: {
-    ...mapGetters(['notes', 'currentNote'])
+    ...mapState(['notesList', 'note'])
   },
   mounted () {
-    this.getNotesList()
+    // this.getNotesList()
   },
   methods: {
-    ...mapActions(['getNotesList', 'saveNote', 'setNote', 'deleteNote'])
+    ...mapActions(['saveNote', 'setNote', 'deleteNote'])
   }
 }
 </script>
