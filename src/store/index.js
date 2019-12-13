@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 const fb = require('./../firebaseConfig.js')
 
 Vue.use(Vuex)
@@ -15,14 +14,16 @@ fb.notesCollection.orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
     notesArray.push(note)
   })
 
-  store.commit('setNotes', notesArray)
+  store.commit('loadNotes', notesArray)
 })
 
 export const store = new Vuex.Store({
   state: {
     notesList: [],
     note: {},
-    performingDelete: false
+    performingDelete: false,
+    performingAdd: false,
+    performingUpdate: false
   },
   actions: {
     async deleteNote ({ commit, state }) {
@@ -37,57 +38,65 @@ export const store = new Vuex.Store({
           console.error(error)
         }
       }
+
+      commit('setNote', {})
     },
     setNote ({ commit }, { id = '', body = '' } = {}) {
       commit('setNote', { id, body })
     },
     async saveNote ({ commit, state }) {
-      let note = {}
+      const { id, body, title } = state.note
 
-      let url = state.note.id ? `/api/notes/${state.note.id}` : '/api/notes'
-      let method = state.note.id ? 'patch' : 'post'
+      if (id) { // update
+        commit('setPerformingUpdate', true)
+        await fb.notesCollection.doc(id).update({
+          body,
+          title,
+          updatedOn: fb.firebase.firestore.Timestamp.now()
+        })
+        commit('setPerformingUpdate', !state.performingUpdate)
+      } else { // add
+        commit('setPerformingAdd', true)
+        await fb.notesCollection.add({
+          body,
+          title,
+          createdOn: fb.firebase.firestore.Timestamp.now(),
+          updatedOn: fb.firebase.firestore.Timestamp.now()
+        })
+        commit('setPerformingAdd', !state.performingAdd)
+      }
 
-      await axios({
-        method,
-        url,
-        data: state.note
-      }).then(response => {
-        note = response.data.note
-      })
-
-      commit('saveNote', note)
+      commit('setNote', {})
     }
   },
   mutations: {
-    setNotes (state, notes) {
+    loadNotes (state, notes) {
       state.notesList = notes
     },
-    setNote (state, { id, body }) {
-      let note = {}
+    setNote (state, note) {
+      let localNote = {}
+
+      const { id, body } = note
 
       if (id) {
-        note = state.notesList.find(note => note.id === id)
-        const newNoteBody = body || note.body
+        localNote = state.notesList.find(n => n.id === id)
+        const newNoteBody = body || localNote.body
 
-        note = { ...note, body: newNoteBody, title: newNoteBody.substring(0, 20) }
+        localNote = { ...note, body: newNoteBody, title: newNoteBody.substring(0, 20) }
       } else if (body) {
-        note = { body, title: body.substring(0, 20) }
+        localNote = { body, title: body.substring(0, 20) }
       }
 
-      state.note = note
-    },
-    saveNote (state, note) {
-      const notePosition = state.notesList.findIndex(n => n.id === note.id)
-      if (notePosition < 0) {
-        state.notesList.push(note)
-      } else {
-        state.notesList.splice(notePosition, 1, note)
-      }
-
-      state.note = null
+      state.note = localNote
     },
     setPerformingDelete (state, flag) {
       state.performingDelete = flag
+    },
+    setPerformingAdd (state, flag) {
+      state.performingAdd = flag
+    },
+    setPerformingUpdate (state, flag) {
+      state.performingUpdate = flag
     }
   }
 })

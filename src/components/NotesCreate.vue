@@ -50,7 +50,7 @@ export default {
       return !!this.currentNote
     },
     showDeleteBtn () {
-      return !!this.note.id
+      return !!(this.note && this.note.id)
     }
   },
   methods: {
@@ -66,7 +66,7 @@ export default {
       this.$emit('set-note')
     },
     onNoteChanged: _.debounce(function (e) {
-      const id = this.note && this.note.id
+      const { id } = this.note
       const body = e.target.value
 
       this.$emit('set-note', { id, body })
