@@ -1,16 +1,19 @@
 <template>
-  <div class="notes-container">
+  <div
+    class="notes-container"
+    :class="{ 'sidebar-open' :  showSidebar }"
+  >
     <NotesList
       :notes="notesList"
       @set-note="setNote"
-      class="notes-container__list"
+      class="notes-list"
     ></NotesList>
     <NotesCreate
       :note="note"
       @save-note="saveNote"
       @set-note="setNote"
       @delete-note="deleteNote"
-      class="notes-container__create"
+      class="notes-create"
     ></NotesCreate>
   </div>
 </template>
@@ -26,7 +29,10 @@ export default {
     NotesList
   },
   computed: {
-    ...mapState(['notesList', 'note'])
+    ...mapState(['notesList', 'note', 'sidebarOpen']),
+    showSidebar () {
+      return this.sidebarOpen
+    }
   },
   methods: {
     ...mapActions(['saveNote', 'setNote', 'deleteNote'])

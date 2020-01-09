@@ -1,23 +1,22 @@
 .notes {
     height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    margin: 5px auto;
 
     &__items {
-        color: white;
-        margin: 16px;
-        overflow: auto;
+        color: $color5;
+        margin: 1.6rem;
         height: 100%;
+    }
 
-        &__item {
-            cursor: pointer;
+    &__item {
+        cursor: pointer;
+        margin-top: 0.5rem;
 
-            &:hover {
-                transition: background 0.3s ease;
-                background: #6e7491;
-            }
+        &:hover {
+            transition: all 1s ease;
+            border-top-left-radius: .5rem;
+            border-top-right-radius: .5rem;
+            background: $color4;
         }
     }
 }

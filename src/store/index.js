@@ -23,7 +23,8 @@ export const store = new Vuex.Store({
     note: {},
     performingDelete: false,
     performingAdd: false,
-    performingUpdate: false
+    performingUpdate: false,
+    sidebarOpen: false
   },
   actions: {
     async deleteNote ({ commit, state }) {
@@ -97,6 +98,9 @@ export const store = new Vuex.Store({
     },
     setPerformingUpdate (state, flag) {
       state.performingUpdate = flag
+    },
+    toggleSidebar (state) {
+      state.sidebarOpen = !state.sidebarOpen
     }
   }
 })

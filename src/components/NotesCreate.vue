@@ -1,20 +1,23 @@
 <template>
   <div class="editor">
     <div class="editor__md">
-      <div v-if="showControls">
+      <div
+        v-if="showControls"
+        class="editor__controls"
+      >
         <button
-          class="btn btn-new-note"
+          class="btn btn--new-note"
           @click="saveNewNote"
         >Save</button>
         <button
-          class="btn btn-clear-note"
-          @click="resetNote"
-        >Clear</button>
-        <button
-          class="btn btn-delete-note"
+          class="btn btn--delete-note"
           v-if="showDeleteBtn"
           @click="deleteNote"
         >Delete</button>
+        <button
+          class="btn btn--clear-note"
+          @click="resetNote"
+        >Clear</button>
       </div>
       <textarea
         name="markdown"

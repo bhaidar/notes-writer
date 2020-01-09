@@ -1,12 +1,10 @@
 .editor {
-  margin: 0;
-  padding: 0;
-  
   font-family: 'Helvetica Neue', Arial, sans-serif;
-
-  height: 100vh;
+  height: 100%;
 
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-between;
 
   div {
@@ -14,50 +12,16 @@
   }
 
   &__md {
-    border-right: 1px solid #ccc;
-    padding: 20px;
-    background-color: #f6f6f6;
+    border-right: 5px solid $color5;
+    padding: 2rem;
+    background-color: $default-bg;
     position: relative;
-
-    .btn {
-        cursor: pointer;
-        width: 68px;
-        padding: 12px;
-        border: none;
-        color: #fff;
-        font-size: 16px;
-        border-radius: 3px;
-        transition: background 0.3s ease;
-    }
-
-    .btn-new-note,
-    .btn-clear-note,
-    .btn-delete-note {
-      position: absolute;
-      top: 0;
-      align-self: center;
-    }
-
-    .btn-new-note {
-      background: $background-btn-primary;
-      right: 0;
-    }
-
-    .btn-clear-note {
-      background: $background-btn-secondary;
-      right: 70px;
-    }
-
-    .btn-delete-note {
-      background: $background-btn-danger;
-      right: 140px;
-    }
 
     textarea {
       border: none;
       resize: none;
       outline: none;
-      background-color: #f6f6f6;
+      background-color: #fff;
       font-size: 1rem;
       font-family: 'Monaco', courier, monospace;
       height: 100%;
@@ -67,16 +31,62 @@
     }
   }
 
+  &__controls {
+      display: inline-block;
+      position: absolute;
+      top: 0.5rem;
+      right: .5rem;
+
+      .btn--new-note,
+      .btn--clear-note,
+      .btn--delete-note{
+        display: inline-block;
+        margin-right: .5rem;
+      }
+
+      .btn--new-note {
+        background: $color3;
+      }
+
+      .btn--clear-note {
+        background: $color5;
+        color: $color2;
+      }
+
+      .btn--delete-note {
+        background: $color4;
+      }
+
+      .btn:last-child {
+        margin-right: 0;
+      }
+  }
+
   &__compiled-md {
     max-height: 100vh;
     width: 100%;
     overflow: auto;
-    padding: 0 20px;
+    padding: 2rem;
 
     > div {
       height: 100%;
       width: 100%;
       text-align: left;
+    }
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .editor {
+    flex-direction: column;
+
+    &__md {
+      border-right: 0;
+      border-bottom: 5px solid $color5;
+    }
+
+    &__compiled-md, &__md {
+      padding: 2rem .5rem;
     }
   }
 }

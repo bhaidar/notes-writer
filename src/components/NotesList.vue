@@ -5,7 +5,7 @@
         v-for="(note, index) in notes"
         :key="index"
         v-bind="note"
-        class="notes__items__item"
+        class="notes__item"
         @set-note="setNote(note)"
       ></Note>
     </div>

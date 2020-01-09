@@ -1,0 +1,54 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  height: 3.6rem;
+  background-color: $header-bg;
+  padding: .7rem 1.5rem;
+  line-height: 2.2rem;
+
+  .sidebar-button {
+    display: none;
+    box-sizing: content-box;
+    width: 1.25rem;
+    height: 1.25rem;
+    position: absolute;
+    padding: .6rem;
+    top: .6rem;
+    left: 1rem;
+    cursor: pointer;
+    
+    .burger {
+      display: block;
+      width: 1.25rem;
+      height: 1.25rem;
+
+      & > path {
+        fill: $color3;
+      }
+    }
+  }
+
+  span, a {
+    display: inline-block;
+  }
+
+  .site-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: $color3;
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 812px) {
+  .navbar {
+    padding-left: 4rem;
+
+    .sidebar-button {
+      display: block;
+    }
+  }
+}

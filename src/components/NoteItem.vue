@@ -1,10 +1,10 @@
 <template>
   <div
-    class="notes__item"
+    class="notes-item"
     @click.prevent="setNote"
   >
     <h4>{{ title }}</h4>
-    <p class="notes__item__body">{{ body }}</p>
+    <p>{{ body }}</p>
   </div>
 </template>
 
