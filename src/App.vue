@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <Notes></Notes>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Notes from './components/Notes.vue'
 
-export default {
-  components: {
-    Notes
-  }
-}
+export default {}
 </script>
 
 <style lang="scss">
