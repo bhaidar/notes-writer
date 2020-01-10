@@ -27,7 +27,7 @@
         }
 
         & > section {
-            padding: 1rem;
+            padding: 2rem;
 
             header {
                 h1 {
@@ -45,13 +45,13 @@
                 }
             }
 
-            form {
+            .form {
                 display:  flex; 
                 flex-direction:  column;
                 align-items:  flex-start; 
                 padding-bottom:  1.25rem;
 
-                .form__field {
+                &__field {
                     position:  relative; 
                     margin-bottom:  .625rem;
 
@@ -73,7 +73,7 @@
                     }
                 }
 
-                .form__btn--submit {
+                &__btn--submit {
                     min-width:  6.25rem;
                     border-radius:  1.5rem; 
                     padding:  1rem 2.5rem;

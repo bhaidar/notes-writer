@@ -24,6 +24,7 @@ export const store = new Vuex.Store({
     performingDelete: false,
     performingAdd: false,
     performingUpdate: false,
+    currentUser: null,
     sidebarOpen: false
   },
   actions: {
@@ -98,6 +99,9 @@ export const store = new Vuex.Store({
     },
     setPerformingUpdate (state, flag) {
       state.performingUpdate = flag
+    },
+    setCurrentUser (state, user) {
+      state.currentUser = user
     },
     toggleSidebar (state) {
       state.sidebarOpen = !state.sidebarOpen
