@@ -1,4 +1,6 @@
 @import "variables.scss";
+@import "elements.scss";
+@import "utilities.scss";
 
 *,
 html,
@@ -6,19 +8,4 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    font-size: 16px;
-    font-family: "Avenir", sans-serif;
-}
-
-.btn {
-    padding: .7rem;
-    color: $color6;
-    text-align: center;
-    display: inline-block;
-    font-size: 1rem;
-    border-radius: .2rem;
-    cursor: pointer;
 }

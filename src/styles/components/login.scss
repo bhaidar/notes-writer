@@ -1,0 +1,113 @@
+.login {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: $color5;
+
+    .session {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+        margin: auto auto;
+        background: $default-bg;
+        border-radius: .25rem;
+        box-shadow: 0px 2px 6px -1px rgba(0,0,0,.12);
+
+        .left {
+            width:  15rem;
+            height:  auto; 
+            min-height:  100%; 
+            background-image: url("/images/photo-1517842645767-c639042777db.jpeg");
+            background-size:  cover;
+            border-top-left-radius: .25rem; 
+            border-bottom-left-radius: .25rem; 
+        }
+
+        & > section {
+            padding: 1rem;
+
+            header {
+                h1 {
+                    margin-bottom: 1rem;
+                }
+
+                p {
+                    line-height:  155%; 
+                    margin-bottom: 2.5rem;
+                    font-size: .85rem;
+                    color: $color4;
+                    opacity:  .85;
+                    font-weight:  400; 
+                    max-width:  18rem; 
+                }
+            }
+
+            form {
+                display:  flex; 
+                flex-direction:  column;
+                align-items:  flex-start; 
+                padding-bottom:  1.25rem;
+
+                .form__field {
+                    position:  relative; 
+                    margin-bottom:  .625rem;
+
+                    label {
+                        position:  absolute; 
+                        top: calc(50% - 7px);
+                        left:  0; 
+                        opacity:  0; 
+                        transition:  all .3s ease; 
+                    }
+                    
+                    input:not(:placeholder-shown) {
+                        padding:  28px 0px 12px 0px; 
+                    }
+                    
+                    input:not(:placeholder-shown) + label {
+                        transform:  translateY(-10px);
+                        opacity: .85;
+                    }
+                }
+
+                .form__btn--submit {
+                    min-width:  6.25rem;
+                    border-radius:  1.5rem; 
+                    padding:  1rem 2.5rem;
+                    margin-top:  5px; 
+                    background-color:  saturate($color3, 30%); 
+                    margin-left:  auto; 
+
+                    &:hover {
+                        transform:  translateY(-3px);
+                        box-shadow:  0 2px 6px -1px rgba($color3, .65);
+                        &:active {
+                            transform:  scale(.99);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .login {
+        .session {
+            flex-direction: column;
+
+            .left {
+                display: none;
+            }
+
+            & > section {
+                form {
+                    padding-bottom: .7rem;
+                }
+            }
+        }
+    }
+}

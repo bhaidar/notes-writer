@@ -1,0 +1,15 @@
+.btn {
+    display: inline-block;
+    -webkit-appearance:  none;
+    width:  auto;
+    text-align:  center;
+    padding: 1rem;
+    color:  $color6; 
+    box-shadow:  0px 2px 6px -1px rgba(0,0,0,.13);
+    font-weight:  500; 
+    font-size:  .85rem;
+    border:  none;
+    outline: 0;
+    border-radius: .2rem;
+    transition:  all .3s ease; 
+}
