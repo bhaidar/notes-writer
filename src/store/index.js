@@ -9,7 +9,7 @@ fb.auth.onAuthStateChanged(user => {
     store.commit('setCurrentUser', user)
 
     // realtime updates from our notes collection
-    fb.notesCollection.orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
+    fb.notesCollection.where('authorId', '==', user.uid).orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
       let notesArray = []
 
       querySnapshot.forEach(doc => {
@@ -59,6 +59,7 @@ export const store = new Vuex.Store({
     },
     async saveNote ({ commit, state }) {
       const { id, body, title } = state.note
+      const authorId = state.currentUser.uid
 
       if (id) { // update
         commit('setPerformingUpdate', true)
@@ -73,6 +74,7 @@ export const store = new Vuex.Store({
         await fb.notesCollection.add({
           body,
           title,
+          authorId,
           createdOn: fb.firebase.firestore.Timestamp.now(),
           updatedOn: fb.firebase.firestore.Timestamp.now()
         })
