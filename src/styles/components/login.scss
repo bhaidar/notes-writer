@@ -94,11 +94,12 @@
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     .login {
-        .session {
-            flex-direction: column;
+        flex-direction: column;
 
+
+        .session {
             .left {
                 display: none;
             }
@@ -107,6 +108,16 @@
                 form {
                     padding-bottom: .7rem;
                 }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .login {
+        .session {
+            & > section {
+                padding: 1rem;
             }
         }
     }
