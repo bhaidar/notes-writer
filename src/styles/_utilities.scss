@@ -13,3 +13,12 @@
     border-radius: .2rem;
     transition:  all .3s ease; 
 }
+
+.errors {
+    display: inline-block;
+    color: $color2;
+    font-weight: 500;
+    font-size: .8rem;
+    line-height: 150%;
+    margin: 1rem auto 0 auto;
+}

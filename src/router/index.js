@@ -34,11 +34,8 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
   const currentUser = fb.auth.currentUser
 
-  if (requiresAuth && !currentUser) {
-    next({ path: '/login', query: { redirect: to.fullPath } })
-  } else if (requiresAuth && currentUser) {
-    next() // logged-in
-  } else {
-    next() // catch-all
-  }
+  if (requiresAuth && !currentUser) next({ path: '/login', query: { redirect: to.fullPath } })
+  else if (!requiresAuth && currentUser) next('/')
+  else if (!requiresAuth && !currentUser) next()
+  else next()
 })

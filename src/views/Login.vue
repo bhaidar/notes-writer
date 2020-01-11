@@ -35,6 +35,10 @@
             @click="login"
             class="btn form__btn--submit"
           >Log In</button>
+          <p
+            class="errors"
+            :style="{visibility: showErrors ? 'visible' : 'hidden'}"
+          >Wrong username or password! Try again.</p>
         </form>
       </section>
     </section>
@@ -51,7 +55,13 @@ export default {
       loginForm: {
         email: '',
         password: ''
-      }
+      },
+      errors: null
+    }
+  },
+  computed: {
+    showErrors () {
+      return this.errors
     }
   },
   methods: {
@@ -60,9 +70,9 @@ export default {
       try {
         const user = await fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password)
         this.setCurrentUser(user.user)
-        this.$router.push('/home')
+        this.$router.push('/')
       } catch (error) {
-        console.log(error)
+        this.errors = error
       }
     }
   }

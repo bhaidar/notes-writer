@@ -4,17 +4,23 @@ const fb = require('./../../firebaseConfig.js')
 
 Vue.use(Vuex)
 
-// realtime updates from our notes collection
-fb.notesCollection.orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
-  let notesArray = []
+fb.auth.onAuthStateChanged(user => {
+  if (user) {
+    store.commit('setCurrentUser', user)
 
-  querySnapshot.forEach(doc => {
-    let note = doc.data()
-    note.id = doc.id
-    notesArray.push(note)
-  })
+    // realtime updates from our notes collection
+    fb.notesCollection.orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
+      let notesArray = []
 
-  store.commit('loadNotes', notesArray)
+      querySnapshot.forEach(doc => {
+        let note = doc.data()
+        note.id = doc.id
+        notesArray.push(note)
+      })
+
+      store.commit('loadNotes', notesArray)
+    })
+  }
 })
 
 export const store = new Vuex.Store({
@@ -24,10 +30,15 @@ export const store = new Vuex.Store({
     performingDelete: false,
     performingAdd: false,
     performingUpdate: false,
-    currentUser: null,
+    currentUser: {},
     sidebarOpen: false
   },
   actions: {
+    clearData ({ commit }) {
+      commit('setCurrentUser', {})
+      commit('loadNotes', [])
+      commit('setNote', {})
+    },
     async deleteNote ({ commit, state }) {
       let id = (state.note && state.note.id)
 
