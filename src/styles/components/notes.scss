@@ -1,4 +1,6 @@
 .notes-container {
+    min-height: calc(100vh - 3.6rem);
+
     .notes-list {
         background: $sidebar-bg;
         width: 20rem;
