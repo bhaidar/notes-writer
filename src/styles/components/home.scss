@@ -1,4 +1,9 @@
 main {
     position: relative;
+}
+
+@media only screen and (min-width: 813px) {
+  main {
     padding-top: 3.6rem;
+  }
 }
