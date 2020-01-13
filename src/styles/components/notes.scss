@@ -1,8 +1,6 @@
 .notes-container {
     min-height: calc(100vh - 3.6rem);
-    -webkit-overflow-scrolling: touch;
-    overflow-y: auto;
-
+    
     .notes-list {
         background: $sidebar-bg;
         width: 20rem;
