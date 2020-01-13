@@ -1,22 +1,58 @@
 .notes {
     height: 100vh;
     margin: 5px auto;
+    position: relative;
+
+    .create-note {
+        padding: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: 500;
+
+        a, span {
+            display: inline-block;
+            color: $color1;
+        }
+
+        span {
+            background-color: $color6;
+            padding: 1rem;
+            border-radius: .2rem;
+        }
+
+        .cancel {
+            background-color: $color4;
+            color: $color6;
+            opacity: .65;
+        }
+    }
 
     &__items {
         color: $color5;
-        margin: 1.6rem;
+        margin: 1rem 1.6rem;
         height: auto;
     }
 
     &__item {
         cursor: pointer;
-        margin-top: 0.5rem;
+        margin-bottom: 1rem;
 
         &:hover {
             transition: all 1s ease;
             border-top-left-radius: .5rem;
             border-top-right-radius: .5rem;
             background: $color4;
+        }
+    }
+}
+
+@media only screen and (min-width: 813px) {
+    .notes {
+        .create-note {
+            display: none;
         }
     }
 }

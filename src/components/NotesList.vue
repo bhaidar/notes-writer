@@ -1,6 +1,17 @@
 <template>
   <div class="notes">
-    <div class="notes__items">
+    <section class="create-note">
+      <a
+        href="#"
+        @click.prevent="newNote"
+      ><span>Create a new Note</span></a>
+      <a
+        href="#"
+        @click.prevent="closeList"
+      ><span class="cancel">Cancel</span></a>
+    </section>
+    <div class="
+        notes__items">
       <Note
         v-for="(note, index) in notes"
         :key="index"
@@ -14,6 +25,8 @@
 
 <script>
 import Note from './NoteItem'
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     notes: {
@@ -25,8 +38,17 @@ export default {
     Note
   },
   methods: {
+    ...mapMutations(['toggleSidebar']),
+    closeList () {
+      this.toggleSidebar()
+    },
+    newNote () {
+      this.$emit('set-note')
+      this.closeList()
+    },
     setNote (note) {
       this.$emit('set-note', { id: note.id })
+      this.toggleSidebar()
     }
   }
 }
