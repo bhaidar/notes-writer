@@ -4,23 +4,17 @@ const fb = require('./../../firebaseConfig.js')
 
 Vue.use(Vuex)
 
-fb.auth.onAuthStateChanged(user => {
-  if (user) {
-    store.commit('setCurrentUser', user)
+// realtime updates from our notes collection
+fb.notesCollection.orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
+  let notesArray = []
 
-    // realtime updates from our notes collection
-    fb.notesCollection.where('authorId', '==', user.uid).orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
-      let notesArray = []
+  querySnapshot.forEach(doc => {
+    let note = doc.data()
+    note.id = doc.id
+    notesArray.push(note)
+  })
 
-      querySnapshot.forEach(doc => {
-        let note = doc.data()
-        note.id = doc.id
-        notesArray.push(note)
-      })
-
-      store.commit('loadNotes', notesArray)
-    })
-  }
+  store.commit('loadNotes', notesArray)
 })
 
 export const store = new Vuex.Store({
@@ -30,15 +24,9 @@ export const store = new Vuex.Store({
     performingDelete: false,
     performingAdd: false,
     performingUpdate: false,
-    currentUser: {},
     sidebarOpen: false
   },
   actions: {
-    clearData ({ commit }) {
-      commit('setCurrentUser', {})
-      commit('loadNotes', [])
-      commit('setNote', {})
-    },
     async deleteNote ({ commit, state }) {
       let id = (state.note && state.note.id)
 
@@ -59,7 +47,6 @@ export const store = new Vuex.Store({
     },
     async saveNote ({ commit, state }) {
       const { id, body, title } = state.note
-      const authorId = state.currentUser.uid
 
       if (id) { // update
         commit('setPerformingUpdate', true)
@@ -74,7 +61,6 @@ export const store = new Vuex.Store({
         await fb.notesCollection.add({
           body,
           title,
-          authorId,
           createdOn: fb.firebase.firestore.Timestamp.now(),
           updatedOn: fb.firebase.firestore.Timestamp.now()
         })
@@ -112,9 +98,6 @@ export const store = new Vuex.Store({
     },
     setPerformingUpdate (state, flag) {
       state.performingUpdate = flag
-    },
-    setCurrentUser (state, user) {
-      state.currentUser = user
     },
     toggleSidebar (state) {
       state.sidebarOpen = !state.sidebarOpen

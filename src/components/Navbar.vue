@@ -16,12 +16,6 @@
     </div>
     <router-link :to="{ name: 'home' }"><span class="site-name">Notes Writer App</span></router-link>
     <div class="links">
-      <a
-        href="#"
-        title="Logout"
-        v-if="showLogout"
-        @click="logout"
-      ><span class="logout">Logout</span></a>
     </div>
   </header>
 </template>
