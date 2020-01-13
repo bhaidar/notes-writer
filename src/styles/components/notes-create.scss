@@ -80,15 +80,12 @@
     flex-direction: column;
 
     &__md {
-      height: 50%;
       border-right: 0;
-      border-bottom: 5px solid $color5;
       padding: 3.8rem 1rem 1rem 1rem;
     }
 
     &__compiled-md {
-      height: 50%;
-      padding: 1rem;
+      display: none;
     }
   }
 }

@@ -1,9 +1,39 @@
-main {
-    position: relative;
+.notes-list {
+  background: $sidebar-bg;
+  width: 20rem;
+  position: fixed;
+  z-index: 10;
+  top: 3.6rem;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+.notes-create {
+  margin: 0;
+  padding-left: 20rem;
+  height: calc(100vh - 3.6rem);
+}
+
+@media only screen and (max-width: 812px) {    
+  .notes-list {
+      transform: translateX(-100%);
+      transition: transform .2s ease;
+  }
+
+  .notes-create {
+      padding-left: 0;
+  }
+
+  .sidebar-open {
+    .notes-list {
+      transform: translateX(0);
+    }
+  }
 }
 
 @media only screen and (min-width: 813px) {
-  main {
-    padding-top: 3.6rem;
+  .notes-create {
+    margin: 3.6rem 0 0 0;
   }
 }

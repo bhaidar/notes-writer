@@ -4,9 +4,6 @@
   padding: .7rem 1.5rem;
   line-height: 2.2rem;
 
-  display: flex;
-  justify-content: space-between;
-
   .sidebar-button {
     display: none;
     box-sizing: content-box;
@@ -40,19 +37,23 @@
     position: relative;
   }
 
-  .logout {
-   background-color: $color6;
-    padding: 0 .5rem;
-    border-radius: .2rem;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: $color1;
+  .links {
+    padding-left: 1.5rem;
+    white-space: nowrap;
+    font-size: .9rem;
+    position: absolute;
+    right: 1.5rem;
+    top: .7rem;
+    display: flex;
 
-    // &:hover {
-    //   background: $color5;
-    //   border-color: $color6;
-    //   outline: 0;
-    // }
+      .logout {
+        background-color: $color6;
+        padding: 0 .5rem;
+        border-radius: .2rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: $color1;
+    }
   }
 }
 
@@ -71,8 +72,8 @@
   .navbar {
     position: fixed;
     top: 0;
-    right: 0;
     left: 0;
+    right: 0;
     z-index: 20;
   }
 }

@@ -1,10 +1,4 @@
 .notes {
-    height: calc(100% + 1px);
-    margin: 5px auto;
-    position: relative;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-
     .create-note {
         padding: 1rem;
         width: 100%;
@@ -21,7 +15,7 @@
 
         span {
             background-color: $color6;
-            padding: 1rem;
+            padding: .5rem;
             border-radius: .2rem;
         }
 
@@ -31,11 +25,10 @@
             opacity: .65;
         }
     }
-
+    
     &__items {
         color: $color5;
         margin: 1rem 1.6rem;
-        height: auto;
     }
 
     &__item {
