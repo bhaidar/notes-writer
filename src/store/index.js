@@ -89,20 +89,13 @@ export const store = new Vuex.Store({
       state.notesList = notes
     },
     setNote (state, note) {
-      let localNote = {}
-
       const { id, body } = note
 
-      if (id) {
-        localNote = state.notesList.find(n => n.id === id)
-        const newNoteBody = body || localNote.body
-
-        localNote = { ...note, body: newNoteBody, title: newNoteBody.substring(0, 20) }
-      } else if (body) {
-        localNote = { body, title: body.substring(0, 20) }
+      state.note = {
+        id: id || undefined,
+        body: body || undefined,
+        title: body ? body.substring(0, 20) : undefined
       }
-
-      state.note = localNote
     },
     setPerformingDelete (state, flag) {
       state.performingDelete = flag

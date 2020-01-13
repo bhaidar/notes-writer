@@ -17,7 +17,7 @@
         <button
           class="btn btn--clear-note"
           @click="resetNote"
-        >Clear</button>
+        >New</button>
       </div>
       <textarea
         name="markdown"

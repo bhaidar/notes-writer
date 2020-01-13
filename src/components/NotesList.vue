@@ -49,7 +49,7 @@ export default {
       this.closeList()
     },
     setNote (note) {
-      this.$emit('set-note', { id: note.id })
+      this.$emit('set-note', { id: note.id, body: note.body })
       this.toggleSidebar()
     }
   }
