@@ -6,10 +6,6 @@
           href="#"
           @click.prevent="newNote"
         ><span>Create a new Note</span></a>
-        <a
-          href="#"
-          @click.prevent="closeList"
-        ><span class="cancel">Cancel</span></a>
       </section>
       <div class="notes__items">
         <Note
