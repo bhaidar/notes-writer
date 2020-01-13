@@ -3,7 +3,7 @@
         padding: 1rem;
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         font-size: 1.1rem;
         font-weight: 500;
@@ -17,12 +17,6 @@
             background-color: $color6;
             padding: .5rem;
             border-radius: .2rem;
-        }
-
-        .cancel {
-            background-color: $color4;
-            color: $color6;
-            opacity: .65;
         }
     }
     
