@@ -1,0 +1,10 @@
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by io.netty.util.internal.ReflectionUtil (file:/Users/bilalhaidar/.cache/firebase/emulators/firebase-database-emulator-v4.2.0.jar) to field sun.nio.ch.SelectorImpl.selectedKeys
+WARNING: Please consider reporting this to the maintainers of io.netty.util.internal.ReflectionUtil
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+02:25:31.090 [NamespaceSystem-akka.actor.default-dispatcher-3] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+02:25:31.280 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000
+02:26:15.765 [Thread-1] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
+02:26:15.772 [NamespaceSystem-akka.actor.default-dispatcher-2] INFO akka.actor.CoordinatedShutdown - Starting coordinated shutdown from JVM shutdown hook
+02:26:15.782 [Thread-1] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
