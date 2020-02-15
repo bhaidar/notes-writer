@@ -23,8 +23,8 @@ exports.onNewNoteCreated =
     console.log(notesId)
 
     const mailOptions = {
-      from: process.env.VUE_APP_EMAIL,
-      to: 'bhaidar@gmail.com',
+      from: '',
+      to: '',
       subject: 'A new note is created',
       html: `
         <h1>New Note</h1>
